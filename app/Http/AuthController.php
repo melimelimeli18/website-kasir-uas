@@ -44,4 +44,29 @@ class AuthController extends Controller {
             dd($e->getMessage());
         }
     }
+
+    public function login (Request $request) {
+        $user = User::where('email', $request->input('email'))->first();
+        \Log::info('===================================================');
+        \Log::info('User login: ', ['user' => $user]);
+
+        if ($user) {
+            \Log::info('Stored password hash: ', ['password' => $user->password]);
+
+            $passwordCorrect = Hash::check(trim($request_>password), $user->password);
+            \Log::info('Password verification result for '. $request->email. ': ', ['result' => $passwordCorrect]);
+
+            if($passwordCorrect) {
+                \Log :: info('Password correct for : '. $request->email);
+                Auth::Login($user);
+                return redirect()->route('app.home');
+            } else {
+                \Log::info('Password mismatch for: '. $request->email);
+                return back ()->withErrors(['email' => 'Password mismacth']);
+            }
+        }
+
+        \Log::info('User not found for email: '.$request-> email);
+        return back()->withErrors(['email' => 'User not found']);
+    }
 }
