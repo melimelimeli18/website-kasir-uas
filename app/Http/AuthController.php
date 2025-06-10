@@ -69,4 +69,9 @@ class AuthController extends Controller {
         \Log::info('User not found for email: '.$request-> email);
         return back()->withErrors(['email' => 'User not found']);
     }
+
+    public function logout() {
+        Auth::logout();
+        return redirect()->route('login');
+    }
 }
