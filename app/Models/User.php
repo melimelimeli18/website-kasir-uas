@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illmuninte\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -21,6 +22,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'restaurant_name',
+        'restaurant_number',
+        'restaurant_address',
+        'restaurant_photo'
     ];
 
     /**
@@ -32,6 +37,12 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    // enkripsi
+    public static function boot()
+    {
+        parent::boot();
+    }
 
     /**
      * Get the attributes that should be cast.
