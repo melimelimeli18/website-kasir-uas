@@ -52,9 +52,11 @@ $request->validate([
         }
     }
 
+    // Hitung pajak dan grand total
     $tax = $totalPrice * 0.1;
     $grandTotal = $totalPrice + $tax;
 
+    // Menyimpan semua data terkait checkout ke session
     session([
         'checkout_data' => [
             'itemsData' => $itemsData,
@@ -71,6 +73,7 @@ $request->validate([
 
 public function submit(Request $request)
 {
+    // Ambil data checkout dari session
     $checkoutData = session('checkout_data', []);
 
     // Validasi data tambahan dari halaman checkout
@@ -79,8 +82,13 @@ public function submit(Request $request)
         'payment_method' => 'required|string',
     ]);
 
+    // Gabungkan data checkout dari session dengan data tambahan dari halaman checkout
     $allData = array_merge($checkoutData, $request->only(['customer_name', 'payment_method']));
-    $allData['sale_date'] = now();  
+
+    // Tambahkan sale_date ke data
+    $allData['sale_date'] = now();  // Atur tanggal penjualan menjadi waktu saat ini
+
+    // Format data items menjadi JSON jika perlu
     $allData['items'] = json_encode($allData['itemsData']);  // Menyimpan items sebagai JSON
 
     Sale::create([
@@ -97,6 +105,8 @@ public function submit(Request $request)
     return redirect()->route('sale.struk');
 }
 
+
+
     public function showCheckoutPage()
     {
         $checkoutData = session('checkout_data', []);
@@ -111,12 +121,15 @@ public function submit(Request $request)
 
 public function generateReceipt()
 {
+    // Ambil data transaksi terakhir dari database
+    $sale = Sale::latest()->first();  // Mengambil transaksi terakhir yang disimpan
 
-    $sale = Sale::latest()->first();
+    // Ambil informasi user (restoran) dari model User
+    $user = auth()->user();  // Ambil user yang sedang login
 
-    $user = auth()->user(); 
+    // Tampilkan halaman struk dengan data yang diperlukan
     return view('sale.struk', [
-        'itemsData' => json_decode($sale->items, true), 
+        'itemsData' => json_decode($sale->items, true), // Decode JSON ke array
         'totalPrice' => $sale->total_price,
         'tax' => $sale->tax,
         'grandTotal' => $sale->grand_total,
