@@ -44,7 +44,8 @@
 </head>
 <body>
 <div class="container mt-4">
-    <h2>Halaman Penjualan</h2>
+    <h2>Halaman Penjualan</h2> 
+    <a href="{{ route('app.home') }}" class="btn btn-secondary mb-3">Home</a>
 
     <form id="transactionForm" method="POST" action="{{ route('sale.checkout') }}"> 
         @csrf

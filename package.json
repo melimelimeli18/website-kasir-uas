@@ -3,6 +3,7 @@
     "private": true,
     "type": "module",
     "scripts": {
+        "install": "composer install && composer require laravel/ui && composer require livewire/livewire && php artisan storage:link && php artisan migrate",
         "build": "vite build",
         "dev": "vite"
     },
