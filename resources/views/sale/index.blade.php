@@ -7,7 +7,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <style>
-        /* Styles for card, badge, etc. (sama seperti sebelumnya) */
         .selectable-card {
             cursor: pointer;
             position: relative;
@@ -74,7 +73,6 @@
             @endforeach
         </div>
 
-        <!-- Hidden inputs untuk items dan quantity -->
         <div id="hiddenInputsContainer"></div>
 
         <div class="mt-3 d-flex justify-content-between align-items-center">
@@ -87,7 +85,6 @@
 
 </div>
 
-<!-- Modal jumlah item (sama seperti sebelumnya) -->
 <div class="modal fade" id="quantityModal" tabindex="-1" aria-labelledby="quantityModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" style="max-width: 35%;">
         <div class="modal-content p-3">
