@@ -14,7 +14,7 @@
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+               <li>{{ $error }}</li>
             @endforeach
         </ul>
     </div>
@@ -45,13 +45,13 @@
             <textarea name="restaurant_address" id="restaurant_address" class="form-control" required></textarea>
         </div>
 
-        {{-- <div class="mb-3">
+        <div class="mb-3">
             <label for="restaurant_photo" class="form-label">Foto Resto</label>
             <input type="file" name="restaurant_photo" class="form-control" accept="image/*">
-        </div> --}}
+        </div>
 
         <div class="mb-3">
-            <label for="email" class="form_label">Email</label>
+            <label for="email" class="form-label">Email</label>
             <input type="email" name="email" id="email" class="form-control" required>
             @error('email')
                 <div class="text-danger">{{ $message }}</div>
@@ -59,7 +59,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="password" class="form-label">Password (at least 8 character)</label>
+            <label for="password" class="form-label">Password (at least 8 charather)</label>
             <input type="password" name="password" id="password" class="form-control" required>
             @error('password')
                 <div class="text-danger">{{ $message }}</div>
@@ -72,7 +72,7 @@
         </div>
 
         <button type="submit" class="btn btn-success">Sign Up</button>
-        <a href="{{ route('login) }}" class="btn btn-secondary">Sudah punya akun?</a>
+        <a href="{{ route('login') }}" class="btn btn-secondary">Sudah punya akun?</a>
     </form>
 </div>
 </body>

@@ -62,28 +62,27 @@
         <!-- Header -->
         <div class="d-flex align-items-center mb-4 header-container" style="position: relative;">
             <div class="me-3">
-                {{-- <img src="{{ asset('storage/' . Auth::user()->restaurant_photo) }}" alt="Logo Restoran" class="rounded-circle header-logo"> --}}
-                <img src="" alt="Logo Restoran" class="rounded-circle header-logo">
+                <img src="{{ asset('storage/' . Auth::user()->restaurant_photo) }}" alt="Logo Restoran" class="rounded-circle header-logo">
             </div>
             <div>
                 <!-- Menampilkan Nama Restoran dan Info -->
-                <h4 class="mb-0">Maknyus</h4>
-                <small>No Telp: 093247289</small><br>
-                <small>Taman Kota</small>
+                <h4 class="mb-0">{{ Auth::user()->restaurant_name }}</h4>
+                <small>No Telp: {{ Auth::user()->restaurant_number }}</small><br>
+                <small>{{ Auth::user()->restaurant_address }}</small>
             </div>
             <!-- Tombol Edit Akun di pojok kanan -->
             <div class="edit-button">
-                <a href="" class="btn btn-primary">Edit Akun</a>
+                <a href="{{ route('profile.edit') }}" class="btn btn-primary">Edit Akun</a>
             </div>
         </div>
 
         <!-- Menampilkan Selamat Datang -->
-        <h2 class="mb-3">Selamat datang di Home, </h2>
+        <h2 class="mb-3">Selamat datang di Home, {{ Auth::user()->restaurant_name }}!</h2>
 
         <!-- Menu Cards -->
         <div class="menu-cards-container">
             <div class="menu-card-container">
-                <a href="" class="card text-decoration-none text-dark shadow menu-card">
+                <a href="{{ route('sale.index') }}" class="card text-decoration-none text-dark shadow menu-card">
                     <div class="card-body">
                         <i class="fas fa-cash-register fa-2x card-icon"></i>
                         <h5 class="card-title">Sale</h5>
@@ -91,23 +90,29 @@
                 </a>
             </div>
             <div class="menu-card-container">
+                <a href="{{ route('transactions.index') }}" class="card text-decoration-none text-dark shadow menu-card">
                     <div class="card-body">
                         <i class="fas fa-history fa-2x card-icon"></i>
                         <h5 class="card-title">Riwayat Transaksi</h5>
                     </div>
+                </a>
             </div>
             <div class="menu-card-container">
+                <a href="{{ route('items.index') }}" class="card text-decoration-none text-dark shadow menu-card">
                     <div class="card-body">
                         <i class="fas fa-box-open fa-2x card-icon"></i>
                         <h5 class="card-title">Item</h5>
                     </div>
+                </a>
             </div>
         </div>
 
         <!-- Logout Button at the Bottom -->
         <div class="footer">
+            <form action="{{ route('logout') }}" method="POST">
                 @csrf   
                 <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
         </div>
     </div>
 
