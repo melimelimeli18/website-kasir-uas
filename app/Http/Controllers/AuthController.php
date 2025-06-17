@@ -25,6 +25,12 @@ class AuthController extends Controller
             ]);
 
             $restaurantNumber = preg_replace('/\D/', '', $request->restaurant_number);
+
+            $photoPath = null;
+            if ($request->hasFile('restaurant_photo')){
+                $photoPath = $request->file('restaurant_photo')->store('restaurant_photos', 'public');
+            }
+
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -32,7 +38,7 @@ class AuthController extends Controller
                 'restaurant_name' => $request->restaurant_name,
                 'restaurant_number' => $restaurantNumber,
                 'restaurant_address' => $request->restaurant_address,
-                // 'restaurant_photo' => $photoPath,  // Simpan nama file foto di database
+                'restaurant_photo' => $photoPath,  // Simpan nama file foto di database
             ]);
     
             \Log::info('User created: ', ['user' => $user]);
